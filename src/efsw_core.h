@@ -15,13 +15,17 @@ class EFSWCore : public Nan::ObjectWrap
   private:
     explicit EFSWCore(const char *path, Nan::Callback *listener);
     ~EFSWCore();
+    efsw::WatchID Start();
+    void Stop();
     static NAN_METHOD(New);
+    static NAN_METHOD(Start);
+    static NAN_METHOD(Stop);
 
   private:
     std::string path;
     Nan::Callback *listener;
     efsw::FileWacher *watcher;
-    efsw::WatchID watch_id;
+    efsw::WatchId watch_id;
     EFSWCoreListener core_listener;
 };
 }; // namespace efsw_core
